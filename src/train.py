@@ -215,7 +215,8 @@ def run_pipeline(config):
     # model creation
     model = create_model(model_name=model_cfg["architecture"],num_classes=model_cfg["num_classes"],freeze_backbone=model_cfg["freeze_backbone"]).to(device)
     # loss
-    criterion = nn.CrossEntropyLoss()
+    # criterion = nn.CrossEntropyLoss()
+    criterion = FocalLoss(alpha=1,gamma=2)
     # optimizers
     optimizer = AdamW(
         model.parameters(),

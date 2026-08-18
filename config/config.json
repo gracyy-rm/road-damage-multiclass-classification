@@ -37,4 +37,5 @@
     "hardware": {
         "num_workers": 4
     }
+
 }

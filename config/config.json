@@ -3,7 +3,7 @@
         "train_csv": "",
         "val_csv": "",
         "test_csv": "",
-        "experiments": "experiments/"
+        "experiments_dir": "experiments/"
     },
 
     "model": {

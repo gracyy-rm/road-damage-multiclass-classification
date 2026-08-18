@@ -17,6 +17,8 @@ from torch.optim import AdamW
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 from .model import create_model
 from .dataset import RoadDamageDataset,get_data_transforms
+# focal loss
+from .loss import FocalLoss
 #train
 def train_one_epoch(model,dataloader,criterion,optimizer,device,epoch,writer,accumulation_steps=2):
     model.train()

@@ -43,7 +43,7 @@ def create_model(
         backbone = models.resnet18(
             weights=models.ResNet18_Weights.DEFAULT
         )
-        in_features = backbone.fc.in_feature
+        in_features = backbone.fc.in_features
         backbone.fc = nn.Identity()
 
     elif model_name == "mobilenet_v3_small":

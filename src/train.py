@@ -315,13 +315,24 @@ def run_pipeline(config):
         history["learning_rate"].append(current_lr)
 
         print(
-            f"Epoch [{epoch}/{train_cfg['epochs']}] | "
-            f"LR: {current_lr:.1e} | "
-            f"Train Loss: {train_loss:.4f} | "
-            f"Train Acc: {train_acc*100:.2f}% | "
-            f"Val Loss: {val_loss:.4f} | "
-            f"Val Acc: {val_acc*100:.2f}%"
-        )
+        f"Epoch [{epoch}/{train_cfg['epochs']}] | "
+        f"LR: {current_lr:.1e} | "
+        f"Train Loss: {train_loss:.4f} | "
+        f"Train Acc: {train_acc*100:.2f}% | "
+        f"Train Precision: {train_precision:.3f} | "
+        f"Train Recall: {train_recall:.3f} | "
+        f"Train F1: {train_f1:.3f} | "
+        f"Val Loss: {val_loss:.4f} | "
+        f"Val Acc: {val_acc*100:.2f}% | "
+        f"Val Precision: {val_precision:.3f} | "
+        f"Val Recall: {val_recall:.3f} | "
+        f"Val F1: {val_f1:.3f}"
+    )
+        if current_lr < previous_lr:
+            print(
+                f"[LR DROP] "
+                f"{previous_lr:.2e} → {current_lr:.2e}"
+            )
 
         if val_acc > best_val_acc:
 

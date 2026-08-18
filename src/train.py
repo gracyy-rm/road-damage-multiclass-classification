@@ -122,8 +122,8 @@ def validate(model,dataloader,criterion,device,epoch,writer,class_names):
     val_f1 = f1_score(all_labels_val,all_preds_val,average="weighted",zero_division=0)
 
     writer.add_scalar("Loss/Validation",epoch_loss,epoch)
-    writer.add_scalar("Accuracy/Validation",epoch_loss,epoch)
-    writer.add_scalar("Metrics/Validation",epoch_loss,epoch)
+    writer.add_scalar("Accuracy/Validation",epoch_acc * 100,epoch)
+    writer.add_scalar("Metrics/Val_Precision",val_precision,epoch)
     writer.add_scalar("Metrics/Val_Recall",val_recall,epoch)
     writer.add_scalar("Metrics/Val_F1_Score",val_f1,epoch)
     cm_image_tensor = plot_confusion_matrix_to_tensor(all_labels_val,all_preds_val,class_names)
@@ -188,6 +188,8 @@ def run_pipeline(config):
     # df
     train_df = pd.read_csv(paths["train_csv"])
     val_df = pd.read_csv(paths["val_csv"])
+    print(f"Training samples: {len(train_df):,}")
+    print(f"Validation samples: {len(val_df):,}")
     # transforms
     train_transform, val_transform = get_data_transforms(img_size=train_cfg["image_size"])
     # datasets
@@ -328,10 +330,13 @@ def run_pipeline(config):
             best_epoch = epoch
             early_stopping_counter = 0
 
-            if (best_model_path and os.path.exists(best_model_path)):
+            if best_model_path and os.path.exists(best_model_path):
                 os.remove(best_model_path)
 
-            best_model_path = os.path.join(run_dir,f"best_model_acc_{val_acc*100:.1f}.pth")
+            best_model_path = os.path.join(
+                run_dir,
+                f"best_model_acc_{val_acc*100:.1f}.pth"
+            )
 
             checkpoint = create_checkpoint(
                 model,
@@ -351,14 +356,17 @@ def run_pipeline(config):
 
             torch.save(checkpoint,best_model_path)
 
-        if val_loss < best_val_loss:
-            best_val_loss = val_loss
-            early_stopping_counter = 0
         else:
             early_stopping_counter += 1
-        if (early_stopping_counter >= train_cfg["early_stopping_patience"]):
-            print("\nEarly stopping triggered.")
-            break
+            print(
+                f"[PATIENCE] "
+                f"{early_stopping_counter}/"
+                f"{train_cfg['early_stopping_patience']}"
+            )
+
+            if early_stopping_counter >= train_cfg["early_stopping_patience"]:
+                print("\nEarly stopping triggered.")
+                break
 
     writer.close()
 

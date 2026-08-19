@@ -83,16 +83,7 @@ This makes MobileNetV3-Small a practical choice when both classification perform
 
 ## Class-wise Performance
 
-### MobileNetV3-Small
-
-| Class             | Support |  Precision |     Recall |         F1 |
-| ----------------- | ------: | ---------: | ---------: | ---------: |
-| Major Damage      |     310 |     0.8939 |     0.8968 |     0.8953 |
-| Manhole           |      84 |     1.0000 |     0.9643 |     0.9818 |
-| Minor Damage      |     221 |     0.7955 |     0.7919 |     0.7937 |
-| Normal Road       |     200 |     0.9038 |     0.9400 |     0.9216 |
-| Speed Breaker     |     142 |     0.9854 |     0.9507 |     0.9677 |
-| **Macro Average** | **957** | **0.9157** | **0.9087** | **0.9120** |
+![Model Comparison](graphs/class_wise_comparison.png)
 
 The model performs particularly well on **Manhole** and **Speed Breaker** classes.
 
@@ -133,7 +124,7 @@ The trained models were evaluated using:
 
 ### Class-wise Performance Comparison
 
-![Model Comparison](graphs/class_wise_comparison.png)
+
 
 ### MobileNetV3 Confusion Matrix
 

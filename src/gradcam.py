@@ -40,7 +40,7 @@ class RoadDamageGradCAM:
     def get_target_layer(model, model_name):
         if model_name == "resnet18":
             return model.backbone.layer4[-1]
-        elif model_name in ("mobilenet_v3", "efficientnet_b0"):
+        elif model_name in ("mobilenet_v3_small", "efficientnet_b0"):
             return model.backbone.features[-1]
         else:
             raise ValueError(f"Unsupported model: {model_name}")

@@ -255,8 +255,6 @@ Install the required dependencies:
 pip install -r requirements.txt
 ```
 
-> Make sure the required PyTorch installation is compatible with your available CPU/GPU environment.
-
 ## Training
 
 The main training entry point is:
@@ -301,20 +299,12 @@ This makes it a suitable choice for applications where computational and memory 
 
 ## Future Improvements
 
-Potential improvements include:
+* Expanding the dataset and improving data augmentation.
+* Further hyperparameter optimization.
+* Evaluating additional pretrained CNN and Vision Transformer (ViT) models.
+* Improving class-wise performance.
+* Exploring model deployment and optimization techniques.
 
-* Increasing the training dataset size
-* Exploring stronger augmentation strategies
-* Further tuning of learning rate and regularization
-* Addressing class-level performance differences
-* Testing additional lightweight architectures
-* Evaluating inference speed on edge devices
-* Adding a larger collection of Grad-CAM examples
-* Investigating model quantization for deployment
-
-## Repository
-
-[Road Damage Multiclass Classification — GitHub](https://github.com/gracyy-rm/road-damage-multiclass-classification?utm_source=chatgpt.com)
 
 ## License
 
